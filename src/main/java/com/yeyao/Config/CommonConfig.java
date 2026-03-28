@@ -68,6 +68,7 @@ public class CommonConfig {
 
     // 向量数据库存储
     // 会自动注入一个embeddingStore对象，不能重复，所以这里我们改成store
+    // TODO 这里如果已经将数据向量化到redis数据库，这里就不用重复再搞一遍了，可以把 @Bean删掉
     @Bean
     public EmbeddingStore<TextSegment> store() {
         // 加载文档进内存

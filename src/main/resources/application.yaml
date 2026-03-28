@@ -27,6 +27,8 @@ langchain4j:
       model-name: text-embedding-v4
       log-requests: true
       log-responses: true
+      # text-embedding-v4模型限制了一次最多只能提交10个片段，所以这里设置成10告诉langchain4j
+      max-segments-per-batch: 10
 logging:
   level:
     dev.langchain4j: debug
