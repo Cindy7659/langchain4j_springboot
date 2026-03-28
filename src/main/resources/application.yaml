@@ -7,6 +7,11 @@ spring:
       port: 6379
       password:
       database: 8
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yeyao?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowMultiQueries=true&tinyInt1isBit=false&allowLoadLocalInfile=true&allowLocalInfile=true&allowUrlInLocalInfile=true&allowPublicKeyRetrieval=true&allowMultiQueries=true&allowPublicKeyRetrieval=true&allowLoadLocalInfile=true&allowLocalInfile=true
+    username: root
+    password: 1234
 langchain4j:
   open-ai:
     chat-model:
@@ -32,5 +37,6 @@ langchain4j:
 logging:
   level:
     dev.langchain4j: debug
-
-
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
