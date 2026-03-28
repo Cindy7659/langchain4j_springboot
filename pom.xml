@@ -79,6 +79,7 @@
             <artifactId>langchain4j-document-parser-apache-pdfbox</artifactId>
             <version>1.0.1-beta6</version>
         </dependency>
+        <!-- TODO redis向量数据库功能还未实现-->
     </dependencies>
 
     <build>
