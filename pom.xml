@@ -52,7 +52,7 @@
             <artifactId>langchain4j-spring-boot-starter</artifactId>
             <version>1.0.1-beta6</version>
         </dependency>
-        <!-- 流式调用相关依赖-->
+        <!-- 流式调用相关依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
@@ -62,7 +62,7 @@
             <artifactId>langchain4j-reactor</artifactId>
             <version>1.0.1-beta6</version>
         </dependency>
-        <!-- redis依赖-->
+        <!-- redis依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>

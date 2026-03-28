@@ -21,7 +21,7 @@ public class RedisChatMemoryStore implements ChatMemoryStore {
     public List<ChatMessage> getMessages(Object memoryId) {
         // 获取会话记录
         String json = stringRedisTemplate.opsForValue().get(memoryId.toString());
-        // 反序列化为 List<ChatMessage>
+        // 反序列化为 List<ChatMessage>对象
         return ChatMessageDeserializer.messagesFromJson(json);
     }
 

@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CommonConfig {
 
+    // 引入自定义的会话记录存储对象
     @Autowired
     private ChatMemoryStore redisChatMemoryStore;
 
