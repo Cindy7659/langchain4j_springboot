@@ -1,6 +1,12 @@
 spring:
   application:
     name: spring_langchain4j
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      database: 8
 langchain4j:
   open-ai:
     chat-model:
@@ -18,3 +24,5 @@ langchain4j:
 logging:
   level:
     dev.langchain4j: debug
+
+
