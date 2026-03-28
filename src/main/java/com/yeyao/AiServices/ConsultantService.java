@@ -8,14 +8,15 @@ import dev.langchain4j.service.spring.AiService;
 import dev.langchain4j.service.spring.AiServiceWiringMode;
 import reactor.core.publisher.Flux;
 
+//@AiService
 @AiService(
         wiringMode = AiServiceWiringMode.EXPLICIT, // 手动装配
         chatModel = "openAiChatModel", // 指定模型
         streamingChatModel = "openAiStreamingChatModel",
         /*chatMemory = "chatMemory" // 配置会话记录*/
-        chatMemoryProvider = "chatMemoryProvider" // 配置会话提供者对象
+        chatMemoryProvider = "chatMemoryProvider", // 配置会话提供者对象
+        contentRetriever = "contentRetriever" // 配置向量数据库内容检索对象
 )
-//@AiService
 public interface ConsultantService {
     // 聊天   --- 阻塞式调用
     // public abstract String chat(String message);
