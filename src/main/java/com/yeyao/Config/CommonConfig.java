@@ -2,11 +2,15 @@ package com.yeyao.Config;
 
 import com.yeyao.AiServices.ConsultantService;
 import dev.langchain4j.data.document.Document;
+import dev.langchain4j.data.document.DocumentSplitter;
 import dev.langchain4j.data.document.loader.ClassPathDocumentLoader;
+import dev.langchain4j.data.document.parser.apache.pdfbox.ApachePdfBoxDocumentParser;
+import dev.langchain4j.data.document.splitter.DocumentSplitters;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.memory.ChatMemory;
 import dev.langchain4j.memory.chat.ChatMemoryProvider;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
+import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.rag.content.retriever.ContentRetriever;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
@@ -28,6 +32,10 @@ public class CommonConfig {
     // 引入自定义的会话记录存储对象
     @Autowired
     private ChatMemoryStore redisChatMemoryStore;
+
+    // 引入向量模型
+    @Autowired
+    private EmbeddingModel embeddingModel;
 
 /*    @Autowired
     private OpenAiChatModel openAiChatModel;
@@ -67,12 +75,17 @@ public class CommonConfig {
     @Bean
     public EmbeddingStore<TextSegment> store() {
         // 加载文档进内存
-        List<Document> contents = ClassPathDocumentLoader.loadDocuments("content");
+        //List<Document> contents = ClassPathDocumentLoader.loadDocuments("content");
+        List<Document> contents = ClassPathDocumentLoader.loadDocuments("pdf", new ApachePdfBoxDocumentParser());
         // 构建向量数据库操作对象
         InMemoryEmbeddingStore<TextSegment> store = new InMemoryEmbeddingStore<>();
+        // 构建文档分割器对象
+        DocumentSplitter recursive = DocumentSplitters.recursive(500, 100);
         // 构建对象，完成文本数据切割，向量化，存储
         EmbeddingStoreIngestor ingestor = EmbeddingStoreIngestor.builder()
                 .embeddingStore(store)
+                .documentSplitter(recursive)
+                .embeddingModel(embeddingModel)
                 .build();
         ingestor.ingest(contents);
         return store;
@@ -85,6 +98,7 @@ public class CommonConfig {
                 .embeddingStore(embeddingStore)
                 .minScore(0.5)
                 .maxResults(3)
+                .embeddingModel(embeddingModel)
                 .build();
     }
 }
